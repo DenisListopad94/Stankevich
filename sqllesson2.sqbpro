@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/thefe/Desktop/sqllesson2.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1750"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:mainmovies"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="actors" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="77"/><column index="2" value="78"/><column index="3" value="86"/><column index="4" value="46"/><column index="5" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="actors_movies" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="72"/><column index="3" value="69"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="bank_accounts" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="118"/><column index="2" value="79"/><column index="3" value="69"/><column index="4" value="117"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="directors" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="79"/><column index="2" value="71"/><column index="3" value="86"/><column index="4" value="40"/><column index="5" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="movies" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="65"/><column index="2" value="200"/><column index="3" value="56"/><column index="4" value="70"/><column index="5" value="79"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sqlite_sequence" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="91"/><column index="2" value="61"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;actors&quot; (
+    actors_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    sex TEXT CHECK (sex IN ('m','f')),
+    UNIQUE(actors_id)
+);
+
+CREATE TABLE &quot;directors&quot; (
+    director_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    sex TEXT CHECK (sex IN ('m','f')),
+	UNIQUE(director_id)
+);
+
+CREATE TABLE &quot;movies&quot; (
+    movie_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_movie TEXT NOT NULL,
+    release INTEGER NOT NULL,
+    budjet INTEGER NOT NULL,
+    director_id INTEGER,
+	UNIQUE(movie_id)
+);
+
+CREATE TABLE &quot;actors_movies&quot; (
+    actors_movie_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movies_id INTEGER NOT NULL,
+    actors_id INTEGER,
+	UNIQUE(actors_movie_id)
+);
+
+ CREATE TABLE bank_accounts (
+ 	bank_account_id INTEGER PRIMARY KEY AUTOINCREMENT,
+ 	director_id INTEGER,
+	actors_id INTEGER,
+ 	account_number TEXT,
+ 	FOREIGN KEY (director_id) REFERENCES directors(director_id),
+ 	FOREIGN KEY (actors_id) REFERENCES actors(actors_id)
+);</sql><sql name="SQL 2">/*INSERT INTO actors (name, surname, age, sex)
+VALUES
+    (&quot;Arnold&quot;, &quot;Schwarzenegger&quot;, 75, &quot;m&quot;),
+    (&quot;Bruce&quot;, &quot;Willis&quot;, 67, &quot;m&quot;),
+    (&quot;Tom&quot;, &quot;Cruise&quot;, 60, &quot;m&quot;),
+    (&quot;Brad&quot;, &quot;Pitt&quot;, 53, &quot;m&quot;),
+    (&quot;Will&quot;, &quot;Smith&quot;, 75, &quot;m&quot;),
+    (&quot;Leonardo&quot;, &quot;DiCaprio&quot;, 48, &quot;m&quot;),
+    (&quot;Tom&quot;, &quot;Hanks&quot;, 66, &quot;m&quot;),
+    (&quot;Johnny&quot;, &quot;Depp&quot;, 59, &quot;m&quot;),
+    (&quot;Harrison&quot;, &quot;Ford&quot;, 80, &quot;m&quot;),
+    (&quot;Sandra&quot;, &quot;Bullock&quot;, 58, &quot;f&quot;),
+    (&quot;Halle&quot;, &quot;Berry&quot;, 56, &quot;f&quot;),
+    (&quot;Julia&quot;, &quot;Roberts&quot;, 55, &quot;f&quot;),
+    (&quot;Kate&quot;, &quot;Winslet&quot;, 47, &quot;f&quot;),
+    (&quot;Angelina&quot;, &quot;Jolie&quot;, 47, &quot;f&quot;);
+
+INSERT INTO directors (name, surname, age, sex)
+VALUES
+    (&quot;James&quot;, &quot;Cameron&quot;, 68, &quot;m&quot;),
+ 	(&quot;Steven&quot;, &quot;Spilberg&quot;, 75, &quot;m&quot;),
+ 	(&quot;Robert&quot;, &quot;Zemeckis&quot;, 70, &quot;m&quot;),
+ 	(&quot;Doug&quot;, &quot;Liman&quot;, 57, &quot;m&quot;),
+	(&quot;Brian&quot;, &quot;De Palma&quot;, 82, &quot;m&quot;),
+	(&quot;John&quot;, &quot;Woo&quot;, 76, &quot;m&quot;),
+	(&quot;Tim&quot;, &quot;Berton&quot;, 64, &quot;m&quot;),
+ 	(&quot;Jan&quot;, &quot;De Bont&quot;, 79, &quot;m&quot;),
+ 	(&quot;Alejandro&quot;, &quot;Agresti&quot;, 61, &quot;m&quot;),
+ 	(&quot;Garry&quot;, &quot;Marshal&quot;, 82, &quot;m&quot;),
+ 	(&quot;Steven&quot;, &quot;Sodeberg&quot;, 59, &quot;m&quot;),
+ 	(&quot;Michael&quot;, &quot;Bay&quot;, 57, &quot;m&quot;),
+ 	(&quot;Barry&quot;, &quot;Sonnenfeld&quot;, 69, &quot;m&quot;),
+ 	(&quot;Simon&quot;, &quot;Kinberg&quot;, 49, &quot;m&quot;),
+ 	(&quot;Christopher&quot;, &quot;Nolan&quot;, 52, &quot;m&quot;),
+ 	(&quot;Martin&quot;, &quot;Scorsese&quot;, 80, &quot;m&quot;),
+ 	(&quot;Stanley&quot;, &quot;Kubrick&quot;, 70, &quot;m&quot;),
+ 	(&quot;Woody&quot;, &quot;Allen&quot;, 87, &quot;m&quot;);
+	
+INSERT INTO movies(name_movie, release, budjet, director_id)
+VALUES
+    (&quot;Titanic&quot;, 1997, 200000000, 1),
+    (&quot;Catch me if you can&quot;,	2002, 52000000, 2),
+    (&quot;Forrest Gump&quot;, 1994, 55000000, 3),
+    (&quot;Terminator 2&quot;, 1991, 102000000, 1),
+    (&quot;Mr. &amp; Mrs. Smith&quot;, 2005, 110000000, 4),
+    (&quot;Indiana Jones 3&quot;, 1989, 48000000, 2),
+    (&quot;Mission impossible 1&quot;, 1996, 80000000, 5),
+    (&quot;Mission impossible 2&quot;, 2000, 125000000, 6),
+    (&quot;Charlie and the Chocolate Factory&quot;, 2005,	150000000, 7),
+    (&quot;Speed&quot;, 1994,	25000000, 8),
+    (&quot;Lake House&quot;, 2006, 40000000, 9),
+    (&quot;Pretty women&quot;, 1990, 190000000, 10),
+    (&quot;Ocean’s eleven&quot;, 2001, 184000000, 11),
+    (&quot;Larry Crowne&quot;, 2011, 30000000, NULL),
+    (&quot;Bad boys 1&quot;, 1995, 19000000, 12),
+    (&quot;Bad boys 2&quot;, 2003, 130000000, 12),
+    (&quot;Men in black&quot;, 1997, 90000000, 13),
+    (&quot;The Martian&quot;, 2015, 108000000, 14),
+    (&quot;Interstellar&quot;, 2014, 165000000, 15);
+
+INSERT INTO bank_accounts(director_id, actors_id, account_number)
+VALUES
+    (NULL, 1, 1264567),
+	(NULL, 2, 1296567),
+	(NULL, 3, 1234567),
+	(NULL, 4, 1294167),
+	(NULL, 5, 1594567),
+	(NULL, 6, 1794567),
+	(NULL, 7, 1994567),
+	(NULL, 8, 2294567),
+	(NULL, 9, 1294567),
+	(NULL, 10, 2297667),
+	(NULL, 11, 3994567),
+	(NULL, 12, 4294567),
+	(NULL, 13, 5294567),
+	(NULL, 14, 6294567),
+	(1, NULL, 7294567),
+	(2,	NULL, 8294567),
+	(3,	NULL, 9294567),
+	(4,	NULL, 1294561),
+	(5,	NULL, 1294562),
+	(6,	NULL, 1294563),
+	(7,	NULL, 1294564),
+	(8,	NULL, 1294565),
+	(9, NULL, 1294566),
+	(10, NULL, 1294567),
+	(11, NULL, 1294568),
+	(12, NULL, 1294569),
+	(13, NULL, 1294521),
+	(14, NULL, 1294537),
+	(15, NULL, 1294547),
+	(16, NULL, 1294557),
+	(17, NULL, 1294557),
+	(18, NULL, 1294577);
+	
+INSERT INTO actors_movies(movies_id, actors_id)
+VALUES
+	(1, 6),
+	(1,	13),
+	(2,	6),
+	(2,	7),
+	(3,	7),
+	(4,	1),
+	(5,	4),
+	(5,	14),
+	(6,	9),
+	(7,	3),
+	(8,	3),
+	(9,	8),
+	(10, 10),
+	(11, 10),
+	(12, 12),
+	(13, 4),
+	(13, 12),
+	(14, 7),
+	(14, 12),
+	(15, 5),
+	(16, 5),
+	(17, 5),
+	(18, NULL),
+	(19, NULL);
+	*/
+
+/*ALTER TABLE bank_accounts
+ADD COLUMN &quot;finance&quot; INTEGER NULL;*/
+
+/*SELECT DISTINCT(directors.name), directors.surname, movies.budjet
+FROM directors
+INNER JOIN movies ON directors.director_id == movies.director_id
+LIMIT 10;*/
+
+/*SELECT actors.name, actors.surname
+FROM actors
+LEFT JOIN actors_movies on actors.actors_id = actors_movies.actors_id
+WHERE actors_movies.actors_id IS NULL
+SELECT directors.name, directors.surname,
+FROM directors
+LEFT JOIN movies on directors.director_id = movies.director_id
+WHERE movies.director_id IS NULL;*/
+
+/*SELECT movies.name_movie, movies.budjet, actors.name, actors.surname
+FROM movies
+INNER JOIN actors_movies ON movies.movie_id = actors_movies.movies_id
+INNER JOIN actors ON actors.actors_id = actors_movies.actors_id
+WHERE movies.budjet &gt; 150000000;
+*/
+
+/*SELECT directors.name, directors.surname
+from directors
+LEFT JOIN movies ON directors.director_id = movies.director_id
+WHERE movies.release &lt; 2000*/
+
+--Добавить фильмы для актёров и режиссёров, у которых нет зависимости в таблице movies. 
+--Не забыть сделать изменения в таблице actors_movies.
+
+/*ALTER TABLE movies 
+ADD COLUMN &quot;rating&quot; REAL;*/
+
+/*UPDATE movies
+SET rating = ABS(RANDOM() % 10)*/
+
+/*SELECT directors.name, directors.surname, movies.name_movie, movies.rating
+from directors
+LEFT JOIN movies on movies.director_id = directors.director_id
+GROUP BY directors.name, directors.surname
+HAVING AVG(movies.rating) &lt; (SELECT AVG(rating) FROM movies);*/
+</sql><current_tab id="1"/></tab_sql></sqlb_project>
