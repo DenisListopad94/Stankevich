@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/thefe/Desktop/sqllesson1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2111"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:mainMovies"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="MovieDetails" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="43"/><column index="3" value="64"/><column index="4" value="40"/><column index="5" value="89"/><column index="6" value="54"/><column index="7" value="65"/><column index="8" value="94"/><column index="9" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Movies" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="94"/><column index="3" value="115"/><column index="4" value="40"/><column index="5" value="161"/><column index="6" value="101"/><column index="7" value="131"/><column index="8" value="94"/><column index="9" value="70"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sqlite_sequence" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="46"/><column index="2" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;Movies&quot;(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    age INTEGER NOT NULL CHECK ( age BETWEEN 5 AND 99),
+    movie_name TEXT,
+    budget INTEGER DEFAULT 10000000,
+    manager TEXT,
+    release_year INTEGER,
+    sex TEXT CHECK (sex IN ('male', 'female')),
+    UNIQUE(id)
+);
+</sql><sql name="SQL 2">/*INSERT INTO &quot;Movies&quot; (name, surname, age, movie_name, budget, manager, release_year, sex)
+VALUES
+(&quot;Arnold&quot;, &quot;Schwarzenegger&quot;, 76, &quot;The Terminator&quot;, 6400000, &quot;James Cameron&quot;, 1984, &quot;male&quot;),
+(&quot;Anne&quot;, &quot;Hathaway&quot;, 41, &quot;The Devil Wears Prada&quot;, 41000000, &quot;David Frankel&quot;, 2006, &quot;female&quot;),
+(&quot;Ryan&quot;, &quot;Reynolds&quot;, 47, &quot;Deadpool&quot;, 58000000, &quot;Tim Miller&quot;, 2016, &quot;male&quot;),
+(&quot;Scarlett&quot;, &quot;Johansson&quot;, 39, &quot;The Prestige&quot;, 40000000, &quot;Christopher Nolan&quot;, 2006, &quot;female&quot;),
+(&quot;Matthew&quot;, &quot;McConaughey&quot;, 54, &quot;Interstellar&quot;, 165000000, &quot;Christopher Nolan&quot;, 2014, &quot;male&quot;),
+(&quot;Michael&quot;, &quot;Caine&quot;, 91, &quot;The Dark Knight&quot;, 185000000, &quot;Christopher Nolan&quot;, 2008, &quot;male&quot;),
+(&quot;Jessica&quot;, &quot;Chastain&quot;, 47, &quot;The Help&quot;, 25000000, &quot;Tate Taylor&quot;, 2011, &quot;female&quot;),
+(&quot;Matt&quot;, &quot;Damon&quot;, 53, &quot;The Martian&quot;, 108000000, &quot;Ridley Scott&quot;, 2015, &quot;male&quot;),
+(&quot;Bruce&quot;, &quot;Willis&quot;, 69, &quot;Pulp Fiction&quot;, 8000000, &quot;Quentin Tarantino&quot;, 1994, &quot;male&quot;),
+(&quot;Christoph&quot;, &quot;Waltz&quot;, 67, &quot;Inglourious Basterds&quot;, 70000000, &quot;Quentin Tarantino&quot;, 2009, &quot;male&quot;),
+(&quot;Samuel&quot;, &quot;Jackson&quot;, 75, &quot;Goodfellas&quot;, 25000000, &quot;Martin Scorsese&quot;, 1990, &quot;male&quot;),
+(&quot;Jennifer&quot;, &quot;Lawrence&quot;, 33, &quot;Passengers&quot;, 110000000, &quot;Morten Tyldum&quot;, 2016, &quot;female&quot;),
+(&quot;Chris&quot;, &quot;Pratt&quot;, 44, &quot;Passengers&quot;, 110000000, &quot;Morten Tyldum&quot;, 2016, &quot;male&quot;),
+(&quot;Chris&quot;, &quot;Pratt&quot;, 44, &quot;Guardians of the Galaxy&quot;, 170000000, &quot;James Gunn&quot;, 2014, &quot;male&quot;),
+(&quot;Robert&quot;, &quot;Downey&quot;, 59, &quot;Oppenheimer&quot;, 100000000, &quot;Christopher Nolan&quot;, 2023, &quot;male&quot;);
+*/
+
+/*ALTER TABLE Movies 
+ADD COLUMN &quot;fee&quot; REAL;*/
+
+/*UPDATE Movies
+SET fee = ABS(RANDOM() % 1000000)*/
+
+/*ALTER TABLE Movies
+RENAME COLUMN fee to fee_actors;*/
+
+/*ALTER TABLE Movies
+ADD COLUMN city TEXT;*/
+
+/*UPDATE Movies
+SET city = &quot;Los Angeles&quot;
+WHERE name = &quot;Arnold&quot;;
+UPDATE Movies
+SET city = &quot;New York&quot;
+WHERE name = &quot;Anne&quot;;
+UPDATE Movies
+SET city = &quot;Vancouver&quot;
+WHERE name = &quot;Ryan&quot;;
+UPDATE Movies
+SET city = &quot;New York&quot;
+WHERE name = &quot;Scarlett&quot;;
+UPDATE Movies
+SET city = &quot;Uvalde&quot;
+WHERE name = &quot;Matthew&quot;;
+UPDATE Movies
+SET city = &quot;Sacramento&quot;
+WHERE name = &quot;Jessica&quot;;
+UPDATE Movies
+SET city = &quot;Cambridge&quot;
+WHERE name = &quot;Matt&quot;;
+UPDATE Movies
+SET city = &quot;Idar-Oberstein&quot;
+WHERE name = &quot;Bruce&quot;;
+UPDATE Movies
+SET city = &quot;Vienne&quot;
+WHERE name = &quot;Christoph&quot;;
+UPDATE Movies
+SET city = &quot;Washington&quot;
+WHERE name = &quot;Samuel&quot;;
+UPDATE Movies
+SET city = &quot;Indian Hills&quot;
+WHERE name = &quot;Jennifer&quot;;
+UPDATE Movies
+SET city = &quot;Virginia&quot;
+WHERE name = &quot;Chris&quot;;
+UPDATE Movies
+SET city = &quot;New York&quot;
+WHERE name = &quot;Robert&quot;;
+UPDATE Movies
+SET city = &quot;London&quot;
+WHERE name = &quot;Michael&quot;;*/
+
+/*SELECT name, surname 
+FROM Movies
+where release_year BETWEEN 1990 and 2000;*/
+
+/*SELECT surname, movie_name
+FROM Movies
+GROUP BY movie_name
+HAVING COUNT(name) &gt;= 2
+ORDER BY surname;*/
+
+/*SELECT DISTINCT name, surname 
+FROM Movies
+WHERE sex = &quot;male&quot; AND age &gt; 55;*/
+
+/*SELECT DISTINCT name, surname
+FROM Movies
+GROUP BY movie_name
+HAVING COUNT(name) &gt;= 2
+ORDER BY surname AND fee_actors &gt; 1000000;*/
+
+/*SELECT sum(fee_actors) 
+FROM Movies
+WHERE release_year BETWEEN 1995 and 2005;*/
+
+/*SELECT movie_name, name, surname
+FROM Movies
+WHERE age - (2024 - release_year) &lt; 35;*/
+
+/*SELECT DISTINCT movie_name
+FROM Movies
+WHERE movie_name REGEXP '^[a-zA-Z]+ [a-zA-Z]+$';*/
+
+/*SELECT movie_name, sum(fee_actors) AS total_fee
+FROM Movies
+GROUP BY movie_name
+ORDER BY total_fee DESC LIMIT 5;*/
+
+/*SELECT movie_name, COUNT(surname) as actor_count
+FROM Movies
+GROUP BY movie_name
+ORDER BY COUNT(surname) DESC LIMIT 1;*/</sql><current_tab id="1"/></tab_sql></sqlb_project>
